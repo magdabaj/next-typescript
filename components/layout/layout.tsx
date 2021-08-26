@@ -1,6 +1,6 @@
 import React from "react";
 
-const Layout = ( children : React.ReactNode) => {
+const Layout: React.FC = ({children} ) => {
   return <>
       <h1>Header</h1>
       <main>
