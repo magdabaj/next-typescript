@@ -13,6 +13,7 @@ module.exports = {
                 semi: false,
             },
         ],
+        'no-inferrable-types': true,
         ...require('eslint-config-prettier').rules,
         ...require('eslint-config-prettier/@typescript-eslint').rules,
     }

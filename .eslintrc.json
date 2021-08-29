@@ -11,6 +11,7 @@
 
     // I suggest you add at least those two rules:
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "no-inferrable-types": "error"
   }
 }
