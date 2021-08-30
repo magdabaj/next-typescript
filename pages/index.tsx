@@ -29,12 +29,7 @@ const Home: NextPage<Props> = (props) => {
           </span>
             </a>
                   {!session && <>Welcome Guest | <button className="btn-link" onClick={() => signIn()}>Login</button></>}
-                  {session && <>Welcome | <span className="btn-link" onClick={()=>signOut()}>Logout</span></>}
-              {/*<UserContext.Consumer>{({user, login, logout})=><>*/}
-
-              {/*</>}*/}
-
-              {/*</UserContext.Consumer>*/}
+                  {session && <>Welcome {session.user?.name} | <span className="btn-link" onClick={()=>signOut()}>Logout</span></>}
           </footer>
         </div>
   )
