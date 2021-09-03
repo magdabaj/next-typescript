@@ -2,8 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from "next/head";
 import Layout from "../components/layout/layout";
-import {Provider, useSession, signIn, signOut} from "next-auth/client";
-// import {UserProvider} from "../context/user-context";
+import {Provider} from "next-auth/client";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (

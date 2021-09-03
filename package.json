@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^3.9.0",
     "axios": "^0.21.1",
     "next": "11.1.0",
     "next-auth": "^3.29.0",
