@@ -1,7 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { processQuestionsData } from '../../helpers/processQuestionsData'
-import tf from '@tensorflow/tfjs'
+import '@tensorflow/tfjs'
+import * as toxicity from '@tensorflow-models/toxicity'
+import { getPredictions } from '../../helpers/getPredictions'
+import { Prediction } from '../../model/Prediction'
+import DisplayTextToxicity from '../../components/displayTextToxicity'
 
 type PageProps = {
   questions: []
@@ -9,16 +13,16 @@ type PageProps = {
 
 const ChatPage: NextPage<PageProps> = ({questions}) => {
   const [question, setQuestion] = useState<string>('')
+  const [predictions, setPredictions] = useState<Prediction[] | null>(null)
   console.log("data: ", questions)
 
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    console.log(question)
 
-    const prediction = processQuestionsData(questions, question)
-    // Get the index of the highest value in the prediction
-
+    const modelPredictions = await getPredictions(question)
+    setPredictions(modelPredictions)
+    console.log("predictions: ", predictions)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +34,7 @@ const ChatPage: NextPage<PageProps> = ({questions}) => {
       <label htmlFor={"question"}>Ask me a question</label>
       <input type="text" id={"question"} onChange={handleChange} value={question} required />
       <button type="submit" onSubmit={handleSubmit}>Send</button>
+      {predictions && <DisplayTextToxicity predictions={predictions}/>}
     </form>
   )
 }
