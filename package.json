@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^3.9.0",
     "axios": "^0.21.1",
+    "babel-plugin-styled-components": "^1.13.2",
     "next": "11.1.0",
     "next-auth": "^3.29.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-storage-hook": "^2.0.4",
+    "styled-components": "^5.3.1",
     "swr": "^1.0.0"
   },
   "devDependencies": {

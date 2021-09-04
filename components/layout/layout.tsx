@@ -1,10 +1,14 @@
 import React from "react";
+import { Grid } from '@material-ui/core'
+import Header from './header'
 
 const Layout: React.FC = ({children} ) => {
   return <>
-      <h1>Header</h1>
+      <Header/>
       <main>
+        <Grid container justifyContent={'center'} alignItems="center">
           {children}
+        </Grid>
       </main>
   </>
 }

@@ -10,7 +10,10 @@ const DisplayTextToxicity: NextPage<Props> = ({predictions}) => {
   return (
     <div>
       {predictions.map(prediction =>
-        <div>{prediction.label}:  {prediction.results.map(result => result.match ? "true" : '')}</div>
+        <div key={predictions.indexOf(prediction)}>
+          {prediction.label}:
+          {prediction.results.map(result => result.match ? "true" : '')}
+        </div>
       )}
     </div>
   )
