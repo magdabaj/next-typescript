@@ -7,15 +7,15 @@ type Props = {
   predictions: Prediction[]
 }
 
-const DisplayTextToxicity: NextPage<Props> = ({predictions}) => {
+const DisplayTextToxicity: NextPage<Props> = ({ predictions }) => {
   return (
     <Grid container>
-      {predictions.map(prediction =>
+      {predictions.map((prediction) => (
         <div key={predictions.indexOf(prediction)}>
           {prediction.label}:
-          {prediction.results.map(result => result.match ? "true" : '')}
+          {prediction.results.map((result) => (result.match ? 'true' : ''))}
         </div>
-      )}
+      ))}
     </Grid>
   )
 }

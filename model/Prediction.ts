@@ -1,7 +1,7 @@
 export type Prediction = {
-  label: string;
+  label: string
   results: {
-    probabilities: Float32Array;
-    match: boolean;
-  }[];
+    probabilities: Float32Array
+    match: boolean
+  }[]
 }

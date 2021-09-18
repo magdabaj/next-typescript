@@ -1,4 +1,4 @@
-import Document, { Head, Html, NextScript, Main } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core'
 import React from 'react'
 import theme from '../theme'
@@ -6,20 +6,28 @@ import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
   public muiTheme = theme(true)
-  render () {
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  render() {
     return (
-      <Html lang={"en"}>
+      <Html lang={'en'}>
         <Head>
-          <meta name="theme-color" content={this.muiTheme.palette.primary.main} />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700&display=swap" />
+          <meta
+            name="theme-color"
+            content={this.muiTheme.palette.primary.main}
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Lato:300,400,500,700&display=swap"
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,700&display=swap"
           />
         </Head>
         <body>
-        <Main/>
-        <NextScript />
+          <Main />
+          <NextScript />
         </body>
       </Html>
     )
@@ -33,7 +41,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     })
 
   const initialProps = await Document.getInitialProps(ctx)
@@ -43,7 +51,7 @@ MyDocument.getInitialProps = async (ctx) => {
     styles: [
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
-      sheet.getStyleElement()
-    ]
+      sheet.getStyleElement(),
+    ],
   }
 }

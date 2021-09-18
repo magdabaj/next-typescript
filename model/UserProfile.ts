@@ -1,4 +1,4 @@
 export type UserProfile = {
-    email: string
-    id: string
+  email: string
+  id: string
 }

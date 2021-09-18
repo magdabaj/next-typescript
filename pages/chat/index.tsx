@@ -1,9 +1,10 @@
 import { NextPage } from 'next'
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
+import ChatForm from './[chatId]'
 
 const Container = styled(Grid)`
-  padding: 4*8px;
+  padding: 4 * 8px;
   justify-content: center;
   align-items: center;
   height: auto;
@@ -37,29 +38,36 @@ const MessageWrapper = styled.div`
   padding-bottom: 16px;
 `
 
-type Props = {}
-const Chat: NextPage<Props> = (props:Props) => {
-return (
-  <Container container direction="row" lg={12}>
-    <ContactsContainer direction="column" lg={3}>
-      <ContactWrapper>
-        <Contact>User 1</Contact>
-      </ContactWrapper>
-      <ContactWrapper>
-        <Contact>User 2</Contact>
-      </ContactWrapper>
-    </ContactsContainer>
-    <MessagesContainer direction="column" lg={9}>
-      <MessageWrapper>
-        <Message>message 1</Message>
-      </MessageWrapper>
-      <MessageWrapper>
-        <Message>message 2</Message>
-      </MessageWrapper>
-      {/*<SendMessage/>*/}
-    </MessagesContainer>
-  </Container>
-)
+const question = [
+  'Which Lloyd Webber musical premiered in the US on 10th December 1993?',
+]
+
+type Props = {
+  contact: { name: string; email: string }
+}
+const Chat: NextPage<Props> = (props: Props) => {
+  return (
+    <Container container direction="row" lg={12}>
+      <ContactsContainer direction="column" lg={3}>
+        <ContactWrapper>
+          <Contact>User 1</Contact>
+        </ContactWrapper>
+        <ContactWrapper>
+          <Contact>User 2</Contact>
+        </ContactWrapper>
+      </ContactsContainer>
+      <MessagesContainer direction="column" lg={9}>
+        <MessageWrapper>
+          <Message>message 1</Message>
+        </MessageWrapper>
+        <MessageWrapper>
+          <Message>message 2</Message>
+        </MessageWrapper>
+        <ChatForm questions={question} />
+      </MessagesContainer>
+      {props}
+    </Container>
+  )
 }
 
 export default Chat
