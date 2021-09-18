@@ -42,10 +42,7 @@ const question = [
   'Which Lloyd Webber musical premiered in the US on 10th December 1993?',
 ]
 
-type Props = {
-  contact: { name: string; email: string }
-}
-const Chat: NextPage<Props> = (props: Props) => {
+const Chat: NextPage = () => {
   return (
     <Container container direction="row" lg={12}>
       <ContactsContainer direction="column" lg={3}>
@@ -65,7 +62,6 @@ const Chat: NextPage<Props> = (props: Props) => {
         </MessageWrapper>
         <ChatForm questions={question} />
       </MessagesContainer>
-      {props}
     </Container>
   )
 }

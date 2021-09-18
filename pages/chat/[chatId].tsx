@@ -4,7 +4,7 @@ import '@tensorflow/tfjs'
 import { getPredictions } from '../../helpers/getPredictions'
 import { Prediction } from '../../model/Prediction'
 import DisplayTextToxicity from '../../components/displayTextToxicity'
-import { Button, FormControl, Grid, TextField } from '@material-ui/core'
+import { Button, Grid, TextField } from '@material-ui/core'
 
 type PageProps = {
   questions: string[]
@@ -32,7 +32,7 @@ const ChatForm: NextPage<PageProps> = ({ questions }) => {
   return (
     <>
       <Grid container direction="row">
-        <FormControl onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <TextField
             label={'Ask me question'}
             type="text"
@@ -43,7 +43,7 @@ const ChatForm: NextPage<PageProps> = ({ questions }) => {
           <Button type="submit" onSubmit={handleSubmit}>
             Send
           </Button>
-        </FormControl>
+        </form>
       </Grid>
 
       {predictions && <DisplayTextToxicity predictions={predictions} />}
