@@ -1,6 +1,7 @@
 import { Prediction } from '../model/Prediction'
 import React from 'react'
 import { NextPage } from 'next'
+import { Grid } from '@material-ui/core'
 
 type Props = {
   predictions: Prediction[]
@@ -8,14 +9,14 @@ type Props = {
 
 const DisplayTextToxicity: NextPage<Props> = ({predictions}) => {
   return (
-    <div>
+    <Grid container>
       {predictions.map(prediction =>
         <div key={predictions.indexOf(prediction)}>
           {prediction.label}:
           {prediction.results.map(result => result.match ? "true" : '')}
         </div>
       )}
-    </div>
+    </Grid>
   )
 }
 

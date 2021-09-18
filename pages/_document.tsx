@@ -2,7 +2,7 @@ import Document, { Head, Html, NextScript, Main } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core'
 import React from 'react'
 import theme from '../theme'
-import { ServerStyleSheet } from '../../../../.config/JetBrains/WebStorm2021.2/javascript/extLibs/codota-types/styled-components/5.1.14/@types/styled-components'
+import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
   public muiTheme = theme(true)
@@ -16,7 +16,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,700&display=swap"
           />
-          <title>Next js Chatbot</title>
         </Head>
         <body>
         <Main/>

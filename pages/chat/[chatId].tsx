@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import { processQuestionsData } from '../../helpers/processQuestionsData'
 import '@tensorflow/tfjs'
-import * as toxicity from '@tensorflow-models/toxicity'
 import { getPredictions } from '../../helpers/getPredictions'
 import { Prediction } from '../../model/Prediction'
 import DisplayTextToxicity from '../../components/displayTextToxicity'
@@ -13,7 +11,7 @@ type PageProps = {
 
 const ChatPage: NextPage<PageProps> = ({questions}) => {
   const [question, setQuestion] = useState<string>('')
-  const [predictions, setPredictions] = useState<Prediction[] | null>(null)
+  const [predictions, setPredictions] = useState<Prediction[] | undefined>(undefined)
   console.log("data: ", questions)
 
 

@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import styled from 'styled-components'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,6 +81,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
+const Container = styled('div')`
+  flex-grow: 1;
+`
 
 const Header = () => {
   const classes = useStyles();
@@ -164,7 +169,7 @@ const Header = () => {
 );
 
   return (
-    <div className={classes.grow}>
+    <Container>
     <AppBar position="static">
     <Toolbar>
       <IconButton
@@ -229,7 +234,7 @@ const Header = () => {
     </AppBar>
   {renderMobileMenu}
   {renderMenu}
-  </div>
+    </Container>
 );
 }
 
