@@ -32,7 +32,7 @@ const Message = styled.div`
   background-color: ${paletteColorDark.secondary};
   color: ${paletteColorDark.text};
   border-radius: 50px;
-  padding: 8px;
+  padding: 12px;
   display: inline-block;
 `
 

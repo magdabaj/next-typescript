@@ -1,5 +1,10 @@
 import React from 'react'
-import { DialogActions, DialogContent, Grid } from '@material-ui/core'
+import {
+  Dialog as MUIDialog,
+  DialogActions,
+  DialogContent,
+  Grid,
+} from '@material-ui/core'
 import styled from 'styled-components'
 import { paletteColorDark } from '../../theme'
 import Button from '../button'
@@ -15,7 +20,7 @@ const Container = styled(Grid)`
 `
 
 const Dialog: React.FC<Props> = ({ children, open, onClose }: Props) => (
-  <Dialog open={open} onClose={onClose}>
+  <MUIDialog open={open} onClose={onClose}>
     <Container container>
       <DialogContent>{children}</DialogContent>
       <DialogActions>
@@ -29,7 +34,7 @@ const Dialog: React.FC<Props> = ({ children, open, onClose }: Props) => (
         </Button>
       </DialogActions>
     </Container>
-  </Dialog>
+  </MUIDialog>
 )
 
 export default Dialog

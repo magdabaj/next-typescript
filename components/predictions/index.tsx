@@ -1,7 +1,8 @@
 import { Prediction } from '../../model/Prediction'
-import React from 'react'
-import { Dialog, DialogActions, DialogContent, Grid } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
+import Dialog from '../dialog'
 import Button from '../button'
 import { paletteColorDark } from '../../theme'
 
@@ -21,6 +22,14 @@ const StyledPrediction = styled.div`
   padding: 8px;
 `
 
+const Container = styled.div`
+  padding: 16px;
+`
+
+const ButtonContainer = styled(Grid)`
+  margin: 16px;
+`
+
 type FinalPrediction = { [label: string]: boolean }
 
 const Predictions = ({ predictions, open, onClose }: Props) => {
@@ -35,57 +44,46 @@ const Predictions = ({ predictions, open, onClose }: Props) => {
   )
   console.log('sorted prediction', finalPredictions)
 
-  // useEffect(() => {
-  //   if (predictions.length) setOpen(true)
-  //   console.log('Prediction')
-  // }, [predictions])
+  useEffect(() => {
+    if (finalPredictions.length) onClose()
+    console.log('Prediction')
+  }, [])
 
   console.log('predictions ', predictions)
   console.log('sorted prediction', finalPredictions)
   console.log('is harmful', open)
   return (
-    <div>
-      <div onClick={onClose}>Click to see if your message was harmful</div>
-      {/*<Dialog open={open} onClose={handleClose}>*/}
-      {/*  <>*/}
-      {/*    {finalPredictions.length &&*/}
-      {/*    finalPredictions.map((prediction) =>*/}
-      {/*      Object.keys(prediction).map((key, index) => (*/}
-      {/*        <Grid container direction={'row'} key={index}>*/}
-      {/*          <PredictionWrapper>*/}
-      {/*            <StyledPrediction>{prediction.label}:</StyledPrediction>*/}
-      {/*            <StyledPrediction>{prediction[key]}</StyledPrediction>*/}
-      {/*          </PredictionWrapper>*/}
-      {/*        </Grid>*/}
-      {/*      ))*/}
-      {/*    )}*/}
-      {/*  </>*/}
-      {/*</Dialog>*/}
+    <Container>
+      <ButtonContainer
+        container
+        item
+        justifyContent={'center'}
+        alignItems="center"
+        lg={3}
+      >
+        <Button
+          backgroundcolor={paletteColorDark.secondary}
+          textcolor={paletteColorDark.text}
+          onClick={onClose}
+        >
+          Click to see if your message was harmful
+        </Button>
+      </ButtonContainer>
 
       <Dialog open={open} onClose={onClose}>
-        <DialogContent>
-          {finalPredictions.map((prediction) =>
+        {finalPredictions.length &&
+          finalPredictions.map((prediction) =>
             Object.entries(prediction).map((key, index) => (
               <Grid container direction={'row'} key={index}>
                 <PredictionWrapper>
-                  <StyledPrediction>{key}</StyledPrediction>
+                  <StyledPrediction>{key}:</StyledPrediction>
                   <StyledPrediction>true</StyledPrediction>
                 </PredictionWrapper>
               </Grid>
             ))
           )}
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={onClose}
-            backgroundcolor={paletteColorDark.primary}
-            textcolor={paletteColorDark.text}
-          >
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
-    </div>
+    </Container>
   )
 }
 
