@@ -22,14 +22,14 @@ const options = (dark: boolean): ThemeOptions => {
     palette: {
       type: dark ? 'dark' : 'light',
       primary: {
-        main: paletteColors.primary
-      }
-    }
+        main: paletteColors.primary,
+      },
+    },
   }
 }
 
 // export const darkTheme = createMuiTheme(options(true))
 // export const lightTheme = createMuiTheme(options(false))
 
-const createTheme = (dark: boolean) => createMuiTheme(options(true))
+const createTheme = (dark: boolean) => createMuiTheme(options(dark))
 export default createTheme

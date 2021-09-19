@@ -2,6 +2,8 @@ import { NextPage } from 'next'
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
 import ChatForm from './[chatId]'
+import { withTheme } from '@material-ui/styles'
+import { paletteColorDark } from '../../theme'
 
 const Container = styled(Grid)`
   padding: 4 * 8px;
@@ -27,8 +29,8 @@ const ContactWrapper = styled.div`
   padding-bottom: 16px;
 `
 const Message = styled.div`
-  background-color: #0070f3;
-  color: #fafafa;
+  background-color: ${paletteColorDark.secondary};
+  color: ${paletteColorDark.text};
   border-radius: 50px;
   padding: 8px;
   display: inline-block;
@@ -44,8 +46,8 @@ const question = [
 
 const Chat: NextPage = () => {
   return (
-    <Container container direction="row" lg={12}>
-      <ContactsContainer direction="column" lg={3}>
+    <Container container direction="row">
+      <ContactsContainer container item direction="column" lg={3}>
         <ContactWrapper>
           <Contact>User 1</Contact>
         </ContactWrapper>
@@ -53,7 +55,7 @@ const Chat: NextPage = () => {
           <Contact>User 2</Contact>
         </ContactWrapper>
       </ContactsContainer>
-      <MessagesContainer direction="column" lg={9}>
+      <MessagesContainer container item direction="column" lg={9}>
         <MessageWrapper>
           <Message>message 1</Message>
         </MessageWrapper>
@@ -66,4 +68,4 @@ const Chat: NextPage = () => {
   )
 }
 
-export default Chat
+export default withTheme(Chat)
