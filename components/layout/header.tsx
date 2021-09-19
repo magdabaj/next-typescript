@@ -13,19 +13,16 @@ import InputBase from '@material-ui/core/InputBase'
 import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import styled from 'styled-components'
+import { paletteColorDark } from '../../theme'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    grow: {
-      flexGrow: 1,
-    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -87,8 +84,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const Container = styled('div')`
+const Container = styled.div`
+  display: flex;
   flex-grow: 1;
+`
+
+const StyledAppBar = styled(AppBar)`
+  background-color: ${paletteColorDark.primary};
 `
 
 const Header = () => {
@@ -176,18 +178,18 @@ const Header = () => {
 
   return (
     <Container>
-      <AppBar position="static">
+      <StyledAppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          {/*<IconButton*/}
+          {/*  edge="start"*/}
+          {/*  className={classes.menuButton}*/}
+          {/*  color="inherit"*/}
+          {/*  aria-label="open drawer"*/}
+          {/*>*/}
+          {/*  <MenuIcon />*/}
+          {/*</IconButton>*/}
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Toxicity Predictions
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -237,7 +239,7 @@ const Header = () => {
             </IconButton>
           </div>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
       {renderMobileMenu}
       {renderMenu}
     </Container>
