@@ -1,82 +1,77 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import '@tensorflow/tfjs'
-import { getPredictions } from '../../helpers/getPredictions'
-import { Prediction } from '../../model/Prediction'
-import { Grid, TextField } from '@material-ui/core'
-import Button from '../../components/button'
+import { Box, Grid } from '@material-ui/core'
+import BottomAppBar from '../../components/chat/bottomAppBar'
+import styled from 'styled-components'
 import { paletteColorDark } from '../../theme'
-import Predictions from '../../components/predictions'
+import ChatForm from '../../components/chat/chatForm'
 
-type PageProps = {
-  questions: string[]
-}
+// type PageProps = {}
 
-const ChatForm: NextPage<PageProps> = ({ questions }) => {
-  const [open, setOpen] = useState(false)
+const Container = styled(Grid)`
+  padding: 4 * 8px;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+`
 
-  const [question, setQuestion] = useState<string>('')
-  const [predictions, setPredictions] = useState<Prediction[] | undefined>(
-    undefined
-  )
-  const [loading, setLoading] = useState<boolean>(false)
-  console.log('data: ', questions)
+const ContactsContainer = styled(Grid)`
+  padding: 8px;
+`
+const MessagesContainer = styled(Grid)`
+  padding: 8px;
+`
 
-  const handleClose = () => setOpen(!open)
+const Contact = styled.div`
+  min-width: 80px;
+  min-height: 40px;
+  background-color: bisque;
+`
 
-  const handleSubmit = async (event: FormEvent) => {
-    setLoading(true)
-    event.preventDefault()
+const ContactWrapper = styled.div`
+  padding-bottom: 16px;
+`
+const Message = styled.div`
+  background-color: ${paletteColorDark.secondary};
+  color: ${paletteColorDark.text};
+  border-radius: 50px;
+  padding: 12px;
+  display: inline-block;
+`
 
-    const modelPredictions = await getPredictions(question)
-    setPredictions(modelPredictions)
-
-    console.log('predictions: ', predictions)
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion(event.target.value)
-  }
-
-  useEffect(() => {
-    if (predictions?.length) setLoading(false)
-  }, [predictions])
+const MessageWrapper = styled.div`
+  padding-bottom: 16px;
+`
+const Chat: NextPage = ({}) => {
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <Grid justifyContent={'center'} container item direction="row">
-          <Grid container item lg={10}>
-            <TextField
-              label={'Ask me question'}
-              type="text"
-              id={'question'}
-              onChange={handleChange}
-              value={question}
-            />
-          </Grid>
-
-          <Grid container item lg={2}>
-            <Button
-              textcolor={paletteColorDark.text}
-              backgroundcolor={paletteColorDark.primary}
-              type="submit"
-              onSubmit={handleSubmit}
-            >
-              Send
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-
-      {predictions && (
-        <Predictions
-          predictions={predictions}
-          open={open}
-          onClose={handleClose}
-        />
-      )}
-      {/*{loading && <div>Loading ...</div>}*/}
-    </>
+    <Container container direction="row" spacing={1}>
+      <ContactsContainer container item direction="column" lg={3}>
+        <ContactWrapper>
+          <Contact>User 1</Contact>
+        </ContactWrapper>
+        <ContactWrapper>
+          <Contact>User 2</Contact>
+        </ContactWrapper>
+      </ContactsContainer>
+      <MessagesContainer container item direction="column" lg={9}>
+        <MessageWrapper>
+          <Message>message 1</Message>
+        </MessageWrapper>
+        <MessageWrapper>
+          <Message>message 2</Message>
+        </MessageWrapper>
+        <ChatForm />
+      </MessagesContainer>
+      <Grid
+        component={Box}
+        item
+        xs={12}
+        display={{ xs: 'block', mdUp: 'none' }}
+      >
+        <BottomAppBar />
+      </Grid>
+    </Container>
   )
 }
 
@@ -93,4 +88,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default ChatForm
+export default Chat

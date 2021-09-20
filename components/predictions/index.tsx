@@ -3,8 +3,6 @@ import React, { useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
 import Dialog from '../dialog'
-import Button from '../button'
-import { paletteColorDark } from '../../theme'
 
 type Props = {
   predictions: Prediction[]
@@ -26,9 +24,9 @@ const Container = styled.div`
   padding: 16px;
 `
 
-const ButtonContainer = styled(Grid)`
-  margin: 16px;
-`
+// const ButtonContainer = styled(Grid)`
+//   margin: 16px;
+// `
 
 type FinalPrediction = { [label: string]: boolean }
 
@@ -47,28 +45,28 @@ const Predictions = ({ predictions, open, onClose }: Props) => {
   useEffect(() => {
     if (finalPredictions.length) onClose()
     console.log('Prediction')
-  }, [])
+  }, [predictions])
 
   console.log('predictions ', predictions)
   console.log('sorted prediction', finalPredictions)
   console.log('is harmful', open)
   return (
     <Container>
-      <ButtonContainer
-        container
-        item
-        justifyContent={'center'}
-        alignItems="center"
-        lg={3}
-      >
-        <Button
-          backgroundcolor={paletteColorDark.secondary}
-          textcolor={paletteColorDark.text}
-          onClick={onClose}
-        >
-          Click to see if your message was harmful
-        </Button>
-      </ButtonContainer>
+      {/*<ButtonContainer*/}
+      {/*  container*/}
+      {/*  item*/}
+      {/*  justifyContent={'center'}*/}
+      {/*  alignItems="center"*/}
+      {/*  lg={3}*/}
+      {/*>*/}
+      {/*  <Button*/}
+      {/*    backgroundcolor={paletteColorDark.secondary}*/}
+      {/*    textcolor={paletteColorDark.text}*/}
+      {/*    onClick={onClose}*/}
+      {/*  >*/}
+      {/*    Click to see if your message was harmful*/}
+      {/*  </Button>*/}
+      {/*</ButtonContainer>*/}
 
       <Dialog open={open} onClose={onClose}>
         {finalPredictions.length &&

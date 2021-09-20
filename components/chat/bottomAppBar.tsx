@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import styled from 'styled-components'
+import { paletteColorDark } from '../../theme'
 //
 // const messages = [
 //   {
@@ -81,6 +82,7 @@ const StyledAppBar = styled(AppBar)`
   top: auto;
   bottom: 0;
   position: fixed;
+  background-color: ${paletteColorDark.primary};
 `
 
 const BottomAppBar: React.FC = () => {
@@ -114,7 +116,7 @@ const BottomAppBar: React.FC = () => {
       {/*    ))}*/}
       {/*  </List>*/}
       {/*</Paper>*/}
-      <StyledAppBar color="primary">
+      <StyledAppBar>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
