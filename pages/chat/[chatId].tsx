@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import '@tensorflow/tfjs'
 import { Box, Grid } from '@material-ui/core'
@@ -6,6 +6,7 @@ import BottomAppBar from '../../components/chat/bottomAppBar'
 import styled from 'styled-components'
 import { paletteColorDark } from '../../theme'
 import ChatForm from '../../components/chat/chatForm'
+import { MessageContext } from '../../context/message-context'
 
 // type PageProps = {}
 
@@ -44,6 +45,9 @@ const MessageWrapper = styled.div`
   padding-bottom: 16px;
 `
 const Chat: NextPage = ({}) => {
+  const messageContext = useContext(MessageContext)
+  const messages = messageContext.getMessages()
+  console.log('message context', messages)
   return (
     <Container container direction="row" spacing={1}>
       <ContactsContainer container item direction="column" lg={3}>
@@ -55,12 +59,11 @@ const Chat: NextPage = ({}) => {
         </ContactWrapper>
       </ContactsContainer>
       <MessagesContainer container item direction="column" lg={9}>
-        <MessageWrapper>
-          <Message>message 1</Message>
-        </MessageWrapper>
-        <MessageWrapper>
-          <Message>message 2</Message>
-        </MessageWrapper>
+        {messages.map((message) => (
+          <MessageWrapper key={message.id}>
+            <Message>{message.body}</Message>
+          </MessageWrapper>
+        ))}
         <ChatForm />
       </MessagesContainer>
       <Grid
