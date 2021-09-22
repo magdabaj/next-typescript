@@ -44,8 +44,7 @@ const Message = styled.div`
 const UserMessageWrapper = styled.div`
   padding-bottom: 16px;
 `
-const ContactMessageWrapper = styled.div`
-  padding-bottom: 16px;
+const ContactMessageWrapper = styled(UserMessageWrapper)`
   margin-left: auto;
   margin-right: 0;
 `
