@@ -1,26 +1,35 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import '@tensorflow/tfjs'
-import { Box, Grid } from '@material-ui/core'
+import {
+  Avatar,
+  Box,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  ListSubheader,
+  Paper,
+} from '@material-ui/core'
 import BottomAppBar from '../../components/chat/bottomAppBar'
 import styled from 'styled-components'
 import { paletteColorDark } from '../../theme'
 import ChatForm from '../../components/chat/chatForm'
-import { MessageContext } from '../../context/message-context'
+import { UseContacts, UseMessages } from '../../context/message-context'
+import { ContactsContainer } from './index'
 
 // type PageProps = {}
 
-const Container = styled(Grid)`
+export const Container = styled(Grid)`
   padding: 4 * 8px;
   justify-content: center;
   align-items: center;
   height: auto;
 `
 
-const ContactsContainer = styled(Grid)`
-  padding: 8px;
-`
-const MessagesContainer = styled(Grid)`
+export const MessagesContainer = styled(Grid)`
   padding: 8px;
 `
 
@@ -49,18 +58,34 @@ const ContactMessageWrapper = styled(UserMessageWrapper)`
   margin-right: 0;
 `
 const Chat: NextPage = ({}) => {
-  const messageContext = useContext(MessageContext)
-  const messages = messageContext.getMessages()
+  const messages = UseMessages()
+  const contacts = UseContacts()
+
   console.log('message context', messages)
   return (
     <Container container direction="row" spacing={1}>
       <ContactsContainer container item direction="column" lg={3}>
-        <ContactWrapper>
-          <Contact>User 1</Contact>
-        </ContactWrapper>
-        <ContactWrapper>
-          <Contact>User 2</Contact>
-        </ContactWrapper>
+        <Paper>
+          <List>
+            {contacts.map((contact) => (
+              <React.Fragment key={contact.userId}>
+                <ListSubheader>{contact.email}</ListSubheader>
+                <ListItem button>
+                  <ListItemAvatar>
+                    <Avatar
+                      alt={'Profile picture'}
+                      src={
+                        '../../images/profilePhotos/panpipe-6380762_1920.jpg'
+                      }
+                    />
+                  </ListItemAvatar>
+                  <ListItemText />
+                </ListItem>
+                <Divider />
+              </React.Fragment>
+            ))}
+          </List>
+        </Paper>
       </ContactsContainer>
       <MessagesContainer container item direction="column" lg={9}>
         {messages.map((message) =>
