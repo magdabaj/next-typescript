@@ -41,8 +41,13 @@ const Message = styled.div`
   display: inline-block;
 `
 
-const MessageWrapper = styled.div`
+const UserMessageWrapper = styled.div`
   padding-bottom: 16px;
+`
+const ContactMessageWrapper = styled.div`
+  padding-bottom: 16px;
+  margin-left: auto;
+  margin-right: 0;
 `
 const Chat: NextPage = ({}) => {
   const messageContext = useContext(MessageContext)
@@ -59,11 +64,18 @@ const Chat: NextPage = ({}) => {
         </ContactWrapper>
       </ContactsContainer>
       <MessagesContainer container item direction="column" lg={9}>
-        {messages.map((message) => (
-          <MessageWrapper key={message.id}>
-            <Message>{message.body}</Message>
-          </MessageWrapper>
-        ))}
+        {messages.map((message) =>
+          message.fromMe ? (
+            <UserMessageWrapper key={message.id}>
+              <Message>{message.body}</Message>
+            </UserMessageWrapper>
+          ) : (
+            <ContactMessageWrapper key={message.id}>
+              {' '}
+              <Message>{message.body}</Message>
+            </ContactMessageWrapper>
+          )
+        )}
         <ChatForm />
       </MessagesContainer>
       <Grid
