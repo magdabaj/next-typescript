@@ -57,7 +57,7 @@ const mockedMessages: Message[] = [
     fromMe: true,
     chatId: 1,
     author: 'magdabaj@protonmail.com',
-    date: new Date(),
+    date: new Date(2021, 9, 23),
   },
   {
     id: 2,
@@ -67,7 +67,7 @@ const mockedMessages: Message[] = [
     fromMe: false,
     chatId: 1,
     author: 'magdabaj7@gmail.com',
-    date: new Date(),
+    date: new Date(2021, 9, 23),
   },
 ]
 type ProviderProps = { children: React.ReactNode }

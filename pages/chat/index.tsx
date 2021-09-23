@@ -16,8 +16,8 @@ import React from 'react'
 import { Container, MessagesContainer } from './[chatId]'
 import styled from 'styled-components'
 
-export const ContactsContainer = styled(Grid)`
-  padding: 8px;
+export const ContactsContainer = styled(Box)`
+  //height: auto;
 `
 
 const Chat: NextPage = () => {
@@ -42,14 +42,6 @@ const Chat: NextPage = () => {
           ))}
         </List>
       </Paper>
-      {/*<ContactsContainer container item direction="column" lg={3}>*/}
-      {/*  <ContactWrapper>*/}
-      {/*    <Contact>User 1</Contact>*/}
-      {/*  </ContactWrapper>*/}
-      {/*  <ContactWrapper>*/}
-      {/*    <Contact>User 2</Contact>*/}
-      {/*  </ContactWrapper>*/}
-      {/*</ContactsContainer>*/}
       <MessagesContainer container item direction="column" lg={9}>
         Chose contact to write a message to
       </MessagesContainer>

@@ -26,27 +26,22 @@ export const Container = styled(Grid)`
   padding: 4 * 8px;
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 100vh;
 `
 
-export const MessagesContainer = styled(Grid)`
-  padding: 8px;
-`
+export const MessagesContainer = styled(Grid)``
 
-const Contact = styled.div`
-  min-width: 80px;
-  min-height: 40px;
-  background-color: bisque;
-`
+const Contact = styled.div``
 
-const ContactWrapper = styled.div`
-  padding-bottom: 16px;
+const Wrapper = styled(Paper)`
+  height: 100vh;
 `
 const Message = styled.div`
   background-color: ${paletteColorDark.secondary};
   color: ${paletteColorDark.text};
   border-radius: 50px;
-  padding: 12px;
+  padding: 8px;
+  line-height: 2px;
   display: inline-block;
 `
 
@@ -57,18 +52,31 @@ const ContactMessageWrapper = styled(UserMessageWrapper)`
   margin-left: auto;
   margin-right: 0;
 `
-const Chat: NextPage = ({}) => {
+
+const MessageDate = styled(ListSubheader)`
+  font-size: x-small;
+  line-height: 10px;
+`
+const ChatSinglePage: NextPage = ({}) => {
   const messages = UseMessages()
   const contacts = UseContacts()
 
   console.log('message context', messages)
   return (
-    <Container container direction="row" spacing={1}>
-      <ContactsContainer container item direction="column" lg={3}>
-        <Paper>
+    <Container container direction="row">
+      <ContactsContainer
+        component={Grid}
+        // @ts-ignore
+        container
+        item
+        direction="column"
+        lg={4}
+        display={{ sm: 'none', md: 'none' }}
+      >
+        <Wrapper>
           <List>
             {contacts.map((contact) => (
-              <React.Fragment key={contact.userId}>
+              <Contact key={contact.userId}>
                 <ListSubheader>{contact.email}</ListSubheader>
                 <ListItem button>
                   <ListItemAvatar>
@@ -82,24 +90,41 @@ const Chat: NextPage = ({}) => {
                   <ListItemText />
                 </ListItem>
                 <Divider />
-              </React.Fragment>
+              </Contact>
             ))}
           </List>
-        </Paper>
+        </Wrapper>
       </ContactsContainer>
-      <MessagesContainer container item direction="column" lg={9}>
-        {messages.map((message) =>
-          message.fromMe ? (
-            <UserMessageWrapper key={message.id}>
-              <Message>{message.body}</Message>
-            </UserMessageWrapper>
-          ) : (
-            <ContactMessageWrapper key={message.id}>
-              {' '}
-              <Message>{message.body}</Message>
-            </ContactMessageWrapper>
-          )
-        )}
+      <MessagesContainer container item direction="column" lg={8} md={12}>
+        <Wrapper>
+          <List>
+            {messages.map((message) =>
+              message.fromMe ? (
+                <UserMessageWrapper key={message.id}>
+                  <MessageDate>{message.date.getDate()}</MessageDate>
+
+                  <Message>
+                    <ListItem>
+                      {message.body}
+                      <ListItemText />
+                    </ListItem>
+                  </Message>
+                </UserMessageWrapper>
+              ) : (
+                <ContactMessageWrapper key={message.id}>
+                  <MessageDate>{message.date.getDate()}</MessageDate>
+
+                  <Message>
+                    <ListItem>
+                      {message.body}
+                      <ListItemText />
+                    </ListItem>
+                  </Message>
+                </ContactMessageWrapper>
+              )
+            )}
+          </List>
+        </Wrapper>
         <ChatForm />
       </MessagesContainer>
       <Grid
@@ -127,4 +152,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default Chat
+export default ChatSinglePage

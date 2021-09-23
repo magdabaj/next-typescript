@@ -6,6 +6,12 @@ import Button from '../button'
 import { paletteColorDark } from '../../theme'
 import Predictions from '../predictions'
 import GridRow from '../layout/GridRow'
+import styled from 'styled-components'
+
+const Container = styled(Grid)`
+  position: absolute;
+  bottom: 64px;
+`
 
 const ChatForm: React.FC = () => {
   const [open, setOpen] = useState(false)
@@ -37,7 +43,7 @@ const ChatForm: React.FC = () => {
     if (predictions?.length) setLoading(false)
   }, [predictions])
   return (
-    <>
+    <Container>
       <form onSubmit={handleSubmit}>
         <GridRow direction="row">
           <Grid container item lg={10}>
@@ -71,7 +77,7 @@ const ChatForm: React.FC = () => {
         />
       )}
       {loading && <div>Loading ...</div>}
-    </>
+    </Container>
   )
 }
 
